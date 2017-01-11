@@ -33,3 +33,20 @@ app.post('/todos', function(req, res) {
         res.status(201).send({"success": true, "msg": "Successfully created new Todo"});
     });
 });
+
+// DELETE /todos/{id}
+// Remove the specified item
+app.delete("/todos/:todoId", function(req, res) {
+    var itemId = req.params.todoId;
+    if(!itemId || itemId === "") {
+        return res.json({"success": false, "msg": "You need to specify the ID of the Todo"});
+    }
+
+    Todo.findByIdAndRemove(itemId, function(err, removed) {
+        if(err) {
+            return res.json({"success": false, "msg": "Error deleting Todo", "error": err});
+        }
+
+        res.status(200).json({"success": true, "msg": "Todo deleted!"});
+    });
+});
