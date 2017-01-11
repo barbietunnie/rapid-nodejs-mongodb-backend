@@ -1,5 +1,5 @@
 var express = require('express');
-var Todo = require('todo');
+var Todo = require('./todo');
 var app = module.exports = express.Router();
 
 // GET /todos
